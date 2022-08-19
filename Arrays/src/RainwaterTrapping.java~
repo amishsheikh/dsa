@@ -1,0 +1,41 @@
+import java.util.Arrays;
+
+public class RainwaterTrapping {
+    public static void main(String[] args) {
+        int[] arr ={3 ,1 ,2 ,4 ,0 ,1 ,3 ,2};
+        System.out.println((ans(arr)));
+    }
+    static int ans(int[] arr){
+        int[] left = new int[arr.length];
+
+         left[0]=arr[0];
+        for (int i = 1; i < arr.length; i++) {
+           left[i]=Math.max(left[i-1],arr[i] );
+        }
+        int max=arr[arr.length-1];
+        int[] right = new int[arr.length];
+        for (int i = arr.length-1; i>= 0; i--) {
+            if (max<arr[i]){
+                max=arr[i];
+            }
+            right[i]=max;
+        }
+        int ans=0;
+        for (int i = 0; i < arr.length; i++) {
+            ans+=Math.min(left[i],right[i] )-arr[i];
+        }
+        return ans ;
+    }
+
+}
+
+/*This problem is based on array preprocessing
+ you have to find the no of blocks in which water will trap
+ blocks are placed horizontally row vice
+ graphical representation for array 3 1 2 4 0 1 3 2
+   3   |  5
+ |     |     |
+ |   | |     | |
+ | | | |   | | |
+ output will be 5+3=8
+ */
